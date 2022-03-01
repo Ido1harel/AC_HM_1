@@ -1,12 +1,12 @@
-#define _CRT_SECURE_NO_WARNINGS
+﻿#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 int calcDividedDigits(int number, int digit);
 
 void main()
-{
+{    //   המספר הכללי
 	int mainNumber = 0;
-	int digit = 0;
-
+	//   המספר בו יתבצע חילוק לכל ספרה בנפרד
+	int digit = 0;       
 	printf("Please enter the main number:\n");
 	scanf("%d", &mainNumber);
 	printf("Please enter the dividing digit:\n");
@@ -15,14 +15,14 @@ void main()
 
 }
 
+
 int calcDividedDigits(int number, int digit)
 {
-	int static counter = 0;
+	int static counter = 0; 
 	if (number <= 0)
 	{
 		return counter;
 	}
-
 	if ((number % 10) % digit == 0)
 	{
 		counter++;
