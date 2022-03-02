@@ -8,10 +8,12 @@ int path_exists(int mat[][N], int rows, int cols);
 
 void main()
 {
+	//TODO make user input the array
 	int _mat[N][N] = { {1,0,0,1 }, {0,1,0,1}, {0,0,1,1}, {0,0,0,1}};
 	printf("result is: %d", path_exists(_mat, N, N));
 }
 
+// TODO add comments
 int path_exists(int mat[][N], int rows, int cols)
 {
 
@@ -41,7 +43,7 @@ int path_exists(int mat[][N], int rows, int cols)
 		return 0;
 	}
 
-	// if not zero continue checking
+	// continue checking on all three paths (up, left, diagonal left up)
 	if ((rows - 2 >= 0 && mat[rows - 2][cols - 1] == 1) ||
 		(cols - 2 >= 0 && mat[rows - 1][cols - 2] == 1) ||
 		(rows - 2 >= 0 && cols - 2 >= 0 && mat[rows - 2][cols - 2] == 1))
