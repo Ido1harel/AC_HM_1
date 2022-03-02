@@ -8,7 +8,7 @@ int path_exists(int mat[][N], int rows, int cols);
 
 void main()
 {
-	int _mat[N][N] = { {1,0,0,0 }, {0,1,1,0}, {0,1,0,0}, {0,1,1,1}};
+	int _mat[N][N] = { {1,0,0,1 }, {0,1,0,1}, {0,0,1,1}, {0,0,0,1}};
 	printf("result is: %d", path_exists(_mat, N, N));
 }
 
@@ -41,25 +41,17 @@ int path_exists(int mat[][N], int rows, int cols)
 		return 0;
 	}
 
-	// go up
 	// if not zero continue checking
-	if (rows - 2 >= 0 && mat[rows - 2][cols - 1] == 1)
+	if ((rows - 2 >= 0 && mat[rows - 2][cols - 1] == 1) ||
+		(cols - 2 >= 0 && mat[rows - 1][cols - 2] == 1) ||
+		(rows - 2 >= 0 && cols - 2 >= 0 && mat[rows - 2][cols - 2] == 1))
 	{
-		return path_exists(mat, rows - 1, cols);
-	}
-
-	// go left
-	// if not zero continue checking
-	if (cols - 2 >= 0 && mat[rows - 1][cols - 2] == 1)
-	{
-		return path_exists(mat, rows, cols - 1);
-	}
-
-	// go diagonaly
-	// if not zero continue checking
-	if (rows - 2 >= 0 && cols - 2 >= 0 && mat[rows - 2][cols - 2] == 1)
-	{
-		return path_exists(mat, rows - 1, cols - 1);
+		int result = path_exists(mat, rows - 1, cols) + path_exists(mat, rows, cols - 1) + path_exists(mat, rows - 1, cols - 1);
+		if (result > 1)
+		{
+			result = 1;
+		}
+		return result;
 	}
 
 	// if didn't continue in any path return zero
