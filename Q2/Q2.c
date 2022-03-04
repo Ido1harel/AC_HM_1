@@ -8,12 +8,36 @@ int path_exists(int mat[][N], int rows, int cols);
 
 void main()
 {
-	//TODO make user input the array
-	int _mat[N][N] = { {1,0,0,1 }, {0,1,0,1}, {0,0,1,1}, {0,0,0,1}};
-	printf("result is: %d", path_exists(_mat, N, N));
+	// user input the array
+	int _mat[N][N];
+
+	// get all matrix numbers from user
+	for (int i = 0; i < N; i++)
+	{
+		for (int j = 0; j < N; j++)
+		{
+			printf("Please insert number for row %d column %d:", i+1, j+1);
+			scanf("%d", &_mat[i][j]);
+		}
+	}
+	
+	// return descriptive result to user
+	if (path_exists(_mat, N, N)) {
+		printf("A path from start to finish exists\n");
+	}
+	else {
+		printf("A path from start to finish does not exist!\n");
+	}
+	
 }
 
-// TODO add comments
+/// <summary>
+/// A function that scans a matrix to see if a path exists from point (0,0) to point (n-1,n-1)
+/// </summary>
+/// <param name="mat">the matrix scanned</param>
+/// <param name="rows">number of rows</param>
+/// <param name="cols">number of columns</param>
+/// <returns>1 if there is a column and 0 if there isn't</returns>
 int path_exists(int mat[][N], int rows, int cols)
 {
 
@@ -49,10 +73,14 @@ int path_exists(int mat[][N], int rows, int cols)
 		(rows - 2 >= 0 && cols - 2 >= 0 && mat[rows - 2][cols - 2] == 1))
 	{
 		int result = path_exists(mat, rows - 1, cols) + path_exists(mat, rows, cols - 1) + path_exists(mat, rows - 1, cols - 1);
+
+		// if there was more than 1 path found make the function return 1. 
+		// if you want to get the number of all possible paths remove this part
 		if (result > 1)
 		{
 			result = 1;
 		}
+
 		return result;
 	}
 
